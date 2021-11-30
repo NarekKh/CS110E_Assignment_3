@@ -24,6 +24,7 @@ function test_prime(n)
 
 console.log(test_prime(37));
 
+
 function task2 (a, b) {
     let arr = [];
     for (let i = a; i <= b; i++) {
@@ -32,10 +33,11 @@ function task2 (a, b) {
         }
     }
 
-    return arr;
+    return arr.join('');
 }
 
 console.log(task2(1, 7))
+
 
 function task3 (n) {
     let t = [];
@@ -48,24 +50,33 @@ function task3 (n) {
 
 console.log(task3(100))
 
+
 function checkPalindrome (num) {
     if (num === task3(num)) return true;
     else return false;
 }
 console.log(checkPalindrome(121))
 
-function binarySum(a, b) {
+
+function  binarySum(a, b) {
 
     let arr1 = [];
     let arr2 = [];
-    while(a != 0) {
-        arr1.unshift(a%10);
-        a = Math.floor(a / 10);
+    if (a == 0) arr1.unshift(0);
+    else {
+        while(a != 0) {
+            arr1.unshift(a%10);
+            a = Math.floor(a / 10);
+        }
     }
-    while(b != 0) {
-        arr2.unshift(b%10);
-        b = Math.floor(b / 10);
+    if (b == 0) arr2.unshift(0);
+    else {
+        while(b != 0) {
+            arr2.unshift(b%10);
+            b = Math.floor(b / 10);
+        }
     }
+
     if (arr1.length > arr2.length) {
         let l = arr1.length - arr2.length;
         for (let i = 0; i < l; i++) {
@@ -95,11 +106,22 @@ function binarySum(a, b) {
             sum.unshift(0)
             carry = 1
         }
+
+        else if (t==3) {
+            sum.unshift(1)
+            carry=1
+        }
+
+
+
+
+
     }
     if (carry == 1) sum.unshift(1)
     return sum;
 }
-console.log(binarySum(101, 100))
+console.log(binarySum(0, 101))
+
 
 function binaryInverse(a)
 {
@@ -110,19 +132,16 @@ function binaryInverse(a)
         inverseVer += stringVer.charAt(i) == "0" ? "1" : "0";
     }
     return inverseVer;
+
 }
 console.log(binaryInverse("100010100101"))
 
 
 function binaryTwosComplement(binNumber)
 {
-
-    let finalResult = binarySum(binaryInverse(binNumber), 1);
-return finalResult.join('');
+    let inverse = parseInt(binaryInverse(binNumber), 10)
+    let finalResult = binarySum(inverse, 1);
+    return finalResult.join('');
 
 }
-
-
-console.log(binaryTwosComplement(100));
-
-
+console.log("complement is " + binaryTwosComplement("011"))
